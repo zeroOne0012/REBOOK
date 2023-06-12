@@ -1,0 +1,614 @@
+$color:rgb(240, 216, 255);
+$bright: rgb(170, 204, 248);
+$bright2: rgb(190, 133, 255);
+$bright3: rgb(211, 230, 255);
+$bright4: rgb(255, 255, 229);
+$bright5: rgb(255, 239, 146);
+$bright6: rgb(228, 205, 255);
+
+$border: rgb(36, 0, 165);
+$dark: rgb(36, 0, 165);
+$dark2: rgb(76, 0, 138);
+$background: rgb(245, 255, 247);
+$content-background: white;
+html {
+    font-size: 110%;
+}
+body {
+    background-color: $background;
+}
+
+.account .btn{
+    color: $dark2; 
+    // background-color: $color;
+}
+.account{
+    float: right; 
+}
+
+.title {
+    text-align: center;
+    margin-top: 20vh;
+    font-size: 5rem;
+}
+
+.title span:nth-child(1){
+    color: rgb(63, 134, 249);
+}
+.title span:nth-child(2){
+    color:rgb(247, 82, 53);
+}
+.title span:nth-child(3){
+    color:rgb(255, 183, 2)
+}
+.title span:nth-child(4){
+    color: rgb(63, 134, 249);
+}
+.title span:nth-child(5){
+    color: rgb(47, 149, 85);
+}
+.title span:nth-child(6){
+    color: rgb(247, 82, 53);
+}
+
+.main-search-bar {
+    width:35rem;
+}
+
+
+main{
+    width: 35rem;
+}
+main .recent{
+    color: $dark2;
+    margin: 0.5rem;
+}
+main .contents-container{
+    background-color: $color;
+    padding: 0.5rem;
+    border-radius: 1.3rem;
+}
+
+main .content{
+    background-color: $bright;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+.book-icon{
+    margin:0.3rem;
+    width: auto;
+    height: 5rem;
+}
+
+.content-info{
+    color:$dark2;
+    margin:0.2rem;
+}
+
+
+//index-logined
+.account-logined{
+    top: 0;
+    right: 0;
+    position: fixed;
+    float: right; 
+}
+.member-info{
+    border-radius: 1rem;
+    border: $bright 0.4rem solid;
+    background-color: $bright3;
+    width: 15rem;
+    height: 9rem;
+    margin: 1rem;
+}
+
+.member-detail{
+    color: $dark2;
+    margin: 1rem;
+}
+
+.post-button{
+    border-radius: 1rem;
+    border: $bright3 0.3rem solid;
+    background-color: $bright;
+    margin: 1rem;
+    text-align: center;
+    padding: 0.2rem;
+    color: $dark;
+}
+
+.chat{
+    background-color: $bright4;
+    border-radius: 1rem;
+    border: $bright5 0.3rem solid;
+    margin: 1rem;
+}
+.chat-button{
+    padding:0.3rem;
+    width:13.5rem;
+    text-align: left;
+}
+.invisible{
+    display: none;
+}
+.chat-list{
+    margin:0.4rem;
+    padding:0.2rem;
+    border-radius: 0.5rem;
+    background-color: $bright5;
+    width: 13.5rem;
+}
+
+.chat-detail{
+    // transition: 0.5s all ease-in-out;
+    background-color: $bright4;
+    border-radius: 0.5rem;
+    padding:0.3rem;
+    font-size: 0.9rem;
+    // overflow: auto;
+    // height: 15rem;
+}
+.chat-sent{
+    text-align: right;
+    margin-bottom: 0.3rem;
+}
+.chat-sent .message{
+    display: inline-block;
+    background-color: $bright3;
+    padding:0.2rem;
+    border-radius: 0.3rem;
+    margin:0.1rem;
+}
+.chat-received{
+    text-align: left;
+    margin-bottom: 0.3rem;
+}
+.chat-received .message{
+    display: inline-block;
+    background-color: $bright2;
+    padding:0.2rem;
+    margin:0.1rem;
+    border-radius: 0.3rem;
+    color:white;
+}
+.input-message{
+    width: 100%;
+}
+.time{
+    color: gray;
+    font-size: 0.8rem;
+}
+
+
+
+
+
+
+//login
+
+.login-main{
+    border: $color solid 3.5px;
+    border-radius: 2rem;
+    padding:6rem;
+    height: 25rem;
+    width: 40rem;
+    margin: 0rem;
+    margin-top:-1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $content-background;
+}
+.login-input{
+    width:25rem;
+}
+.login-text{
+    margin: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid $color;
+}
+.login-button{
+    background-color: $bright2;
+    border: $dark 1px solid;
+    color: $dark;
+    font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+//register
+
+
+.logo {
+    width: auto;
+    height: 4rem;
+    margin: 1rem;
+    text-align: left;
+    font-size: 2rem;
+}
+
+
+.register-main{
+    background-color: $content-background;
+    border: $dark2 solid 3.5px;
+    border-radius: 2rem;
+    padding:4rem;
+    height: auto;
+    width: 35rem;
+    margin: 0rem;
+    margin-top:1.5rem;
+    margin-left:2rem;
+}
+.register-input{
+    margin-top: 1.2rem;
+}
+.register-text{
+    margin: -2rem;
+    margin-bottom: 1.5rem;
+    font-size: 27px;
+    color: $dark;
+}
+.register-button{
+    // margin-top: 1rem;
+    background-color: $bright2;
+    border:none;
+    margin-top: 2.7rem;
+}
+
+
+
+
+// member_info
+.member-info-title{
+    display:flex;
+}
+.edit{
+    margin:-2rem;
+    margin-left: auto;
+}
+
+.member-info-main{ // 메인 컨테이터
+    background-color: $content-background;
+    border-left: $dark2 solid 3.5px;
+    padding:4rem;
+    height: auto;
+    width: 40vw;
+}
+.member-info-text{ //회원정보 텍스트
+    margin: -2rem;
+    margin-bottom: 1.5rem;
+    font-size: 27px;
+    color: $dark;
+}
+.member-detail{ //회원정보 요소들
+    margin-top: 0.8rem;
+}
+.member-detail .value{
+    background-color: rgb(243, 243, 243);
+    margin:0.3rem;
+    margin-left: 0;
+}
+
+
+
+
+.view-posts-button{
+    border-radius: 1rem;
+    border: $bright3 0.3rem solid;
+    background-color: $bright;
+    margin: 1rem;
+    text-align: center;
+    padding: 0.2rem;
+    color: $dark;
+}
+
+
+.flex-space-between{ 
+    display: flex;
+    justify-content: space-between;
+}
+.content .state{  // 거래상태
+    margin:0.5rem;
+    margin-left: auto; // 오른쪽으로
+    background-color: $bright3;
+    height:2.2rem;
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+}
+
+.sold{
+    background-color: $bright2;
+    padding: 0.7rem;
+    border-radius: 1rem;
+    display: flex;
+    margin: 0;
+    color:white;
+}
+.sold .state{
+    margin:0.5rem;
+    margin-left: auto; // 오른쪽으로
+    background-color: $color;
+    height:2.2rem;
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+    color:$bright2;
+}
+.sold .delete{
+    text-align: center;
+    margin:0.5rem;
+    margin-left: auto; // 크기 맞춤
+    background-color: $color;
+    height:2.2rem;
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+    color: red;
+}
+.sold .right{
+    margin-left: auto; // 오른쪽으로
+}
+.post-block{
+    background-color: $color;
+    border-radius: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.sold .date{
+    color:white;
+    font-size: 0.8rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+// search
+
+
+.header {
+    padding-top: 2rem;
+    border-bottom: solid 2px $border;
+    height: auto;
+    // background-color: white;
+    width: 70rem;
+    margin-left: 3rem;
+}
+
+
+.search-form{
+    width: 576px;
+    height: 88px;
+    // margin: 0 auto;
+    display: flex;
+    position: relative;
+    height:auto;
+}
+.search-input{
+    border: solid 2px $border;
+    border-radius: 2rem;
+}
+.search-select{
+    border: 0px solid $border;
+    text-align: center;
+    /*background-color: lighten($color, 40%);*/
+    border-radius: 2rem;
+    color: gray;
+}
+// .nav-mar{
+//     margin-top: 0.7rem;
+// }
+// .header-menu a{
+//     padding-left: 30px;
+//     padding-right: 30px;
+//     margin-left: 30px;
+//     margin-right: 30px;
+//     color: darken($border, 7%);
+//     font-size: 18px;
+//     font-weight: 600;
+// }
+// .header-menu {
+//     margin: 0 auto;
+// }
+
+
+.search-button{
+        background-color: lighten($border, 5%);
+        border-radius: 1rem;
+        color: white;
+}
+// .active {
+//     background-color: black;
+// }
+
+
+.margin-top{
+    margin-top: 1rem;
+    
+}
+
+
+.search-main{
+    margin: 1rem;
+    margin-top: 10rem;
+    margin-left: 3rem;
+    // background-color: white;
+    padding: 3rem;
+    border-radius: 2rem;;
+    padding-left: 15rem;
+    width: 65rem; // 왜 이 이상 안되는지?
+}
+.sub-title{
+    border-left: $dark solid 2px;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+}
+.main-box{
+    border-radius: 1.5rem;
+    padding-bottom:0.4rem;
+    height: auto;
+}
+.book{
+    margin:1rem;
+    margin-top:1.7rem;
+    margin-bottom:1.7rem;
+}
+
+
+//search selected
+.content .settings{
+    margin:0.4rem;
+    font-size: 1.1rem;
+}
+
+.no-padding{
+    padding-left: 0rem;
+}
+.flex{
+    display:flex;
+    align-items: flex-start;
+}
+.filter{
+    width:18rem;
+    padding-left: 1.5rem;
+}
+.filter-item{
+    margin-top: 1.7rem;
+    margin-bottom: 0.4rem;
+}
+.filter-search-button{
+    margin-top:0.5rem;
+    background-color: $dark;
+    color:white;
+}
+.filter{
+    background-color: $bright3;
+    padding:1rem;
+    margin:1rem;
+    border-radius: 1rem;
+}
+.filter-item{
+    padding-left:0.5rem;
+    border-left: 1px solid $bright2;
+}
+
+.main-list{
+    margin-top: 3rem;
+}
+
+
+
+// display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   height: 100vh; /* 필요한 높이 값으로 변경 가능 */
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    // transform: translate(-50%, -50%);
+
+
+
+
+
+    //post
+
+.post-main{
+    margin:1rem;
+    width:50vw;
+    background-color: $bright3;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.post-main .form-label{
+    width:5rem;
+}
+.buttons{
+
+}
+.custom-button{
+    margin:0.5rem;
+    padding:0.5rem;
+    background-color: $bright6;
+    border-radius: 0.5rem;
+}
+.post-book{
+    margin-top: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid black;
+}
+.post-main .buttons{
+    margin-top: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid $bright;
+}
+
+.post-main .item{
+    margin:0.4rem;
+    color:white;
+}
+
+.margin-right{
+    margin-right: 0.7rem;
+}
+.post-main .margin-top{
+    margin-top: 0.4rem;
+}
+
+.post-text{
+    height:30rem;
+    width:100%; 
+    margin:0.4rem;
+    margin-left: 0.7rem;
+}
+
+//post-view
+.post-content{
+    width:100%;
+    background-color: $bright4;
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+    margin-top: 0.8rem;
+}
+
+.post-main .detail{
+    background-color: $bright;
+    color:white;
+    border-radius: 0.5rem;
+    padding-left:0.7rem;
+    padding-right:0.7rem;
+}
+.post-main .title{
+    margin:1rem;
+    font-size: 1.2rem;
+    text-align: left;
+}
+.post-photo{
+    width:40%;
+    height: auto;
+    margin:1rem;
+}
+//others
+.review-text{
+    height:6rem;
+    width:95%; 
+    margin:0.4rem;
+    margin-left: 0.7rem;
+}
+.top-border{
+    border-top: 2px solid $bright2;
+    padding-top: 1rem;
+}

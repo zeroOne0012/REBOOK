@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dbteam4.booksale.repository.PostMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="postId">
+        insert into post (book_ISBN,seller_id, post_time, post_title, post_content, sales_method, post_price, shipping_method, book_quality)
+        Values (#{ISBN}, #{sellerId}, #{postTime}, #{postTitle}, #{postContent}, #{salesMethod}, #{postPrice}, #{shippingMethod}, #{bookQuality})
+    </insert>
+
+    <update id="updateST">
+        update post
+        set post_status = #{postStatus}
+        where post_id = #{postId};
+    </update>
+
+    <resultMap id="postResultMap" type="PostBookDTO">
+        <id property="postId" column="post_id" />
+        <result property="sellerId" column="seller_id" />
+        <result property="postTitle" column="post_title" />
+        <result property="postContent" column="post_content" />
+        <result property="salesMethod" column="sales_method" />
+        <result property="postPrice" column="post_price" />
+        <result property="shippingMethod" column="shipping_method" />
+        <result property="postStatus" column="post_status"/>
+        <result property="bookQuality" column="book_quality" />
+        <result property="postTime" column="post_time" />
+        <association property="book" javaType="Book">
+            <id property="ISBN" column="ISBN" />
+            <result property="title" column="title" />
+            <result property="author" column="author" />
+            <result property="publisher" column="publisher" />
+            <result property="pubDate" column="pub_date" />
+            <result property="image" column="image" />
+            <result property="discount" column="discount" />
+            <result property="description" column="description" />
+        </association>
+    </resultMap>
+
+    <select id="findByPostId" resultMap="postResultMap">
+        select * from
+        post p inner join book b on p.book_ISBN = b.ISBN
+        where p.post_id =#{postId};
+    </select>
+
+    <select id="findRecentPost" resultMap="postResultMap">
+        select * from
+        post p inner join book b on p.book_ISBN = b.ISBN
+        order by post_id desc limit #{recentNum}
+    </select>
+
+
+                       
+    <select id="findInterestPost" resultMap="postResultMap">
+        select * from interest i
+                          inner join post p on i.post_id = p.post_id
+                          inner join book b on b.ISBN = p.book_ISBN
+        where i.user_id = #{userId};
+    </select>
+
+    <select id="findUserPost" resultMap="postResultMap">
+        select * from
+            post p inner join book b on p.book_ISBN = b.ISBN
+        where p.seller_id = #{id}
+    </select>
+
+    <select id="findAll"  resultMap="postResultMap">
+        select * from
+        post p inner join book b on p.book_ISBN = b.ISBN
+        <where>
+            <if test="bookSearchType.name() == 'all'">
+                b.title like concat('%', #{keyword}, '%') or b.author like concat('%', #{keyword}, '%') or  b.isbn = #{keyword};
+            </if>
+            <if test="bookSearchType.name() == 'bookTitle'">
+                b.title like concat('%', #{keyword}, '%');
+            </if>
+            <if test="bookSearchType.name() == 'ISBN'">
+                b.isbn = #{keyword};
+            </if>
+            <if test="bookSearchType.name() == 'author'">
+                b.author like concat('%', #{keyword}, '%');
+            </if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dbteam4.booksale.repository.SchoolMapper">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into school (university, department)
+        VALUES (#{university}, #{department})
+    </insert>
+
+    <select id="findAll" resultType="School">
+        select * from school
+    </select>
+
+</mapper>

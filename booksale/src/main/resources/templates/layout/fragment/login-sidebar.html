@@ -1,0 +1,30 @@
+<div class = "account-logined" th:fragment="login-sidebar">
+    <div class = "member-info" role="group">
+        <div class = "member-detail">
+            <div th:text="${session.loginUser.userName}">전강욱 님</div>
+            <div title="">
+                <span th:text="'신뢰도: ' + ${session.loginUser.mileage} + '   ('"></span>
+                <span th:if="${session.loginUser.mileage < 20}">브론즈</span>
+                <span th:if="${session.loginUser.mileage >= 20 && session.loginUser.mileage <= 40}">실버</span>
+                <span th:if="${session.loginUser.mileage > 40 && session.loginUser.mileage <= 60}">골드</span>
+                <span th:if="${session.loginUser.mileage > 60 && session.loginUser.mileage <= 80}">플래티넘</span>
+                <span th:if="${session.loginUser.mileage > 80}">다이아몬드</span>
+                <span th:text="')'"></span>
+            </div>
+            <div class="detail-img">
+                <a href="alarm.html" th:href="@{/alarm}"><img class="bell-image" src="../img/bell2.png" th:src="@{/img/bell2.png}"></a>
+                <a href="mail.html" th:href="@{/chat}"><img class="mail-image" src="../img/mail2.png" th:src="@{/img/mail2.png}"></a>
+            </div>
+        </div>
+        <div class = "member-detail">
+            <span class = "col"><a class="black" href = "user/userInfo.html" th:href="@{/user/info}">회원정보</a></span>
+            <span class = "col"><a class="black" href="#" onclick="document.getElementById('logout').submit();">로그아웃</a></span>
+        </div>
+    </div>
+
+    <a th:href="@{/post}"><div class = "post-button black">판매글 작성하기</div></a>
+
+    <form id="logout" th:action="@{/user/logout}" method="POST">
+        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+    </form>
+</div>

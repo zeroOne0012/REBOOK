@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  mybatis 주의사항-->
+<!--  select를 쿼리를 이용하고, 도메인 객체에 값을 셋팅할 때 멤버변수의 이름과 테이블의 컬럼이 일치해야함.-->
+
+<!--  id : mapper 인터페이스의 메소드 이름  -->
+
+
+<mapper namespace="dbteam4.booksale.repository.UserMapper">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into user (user_name, phone_number, user_id, user_password, school_id)
+        VALUES (#{userName},
+                #{phoneNumber},
+                #{userID},
+                #{password},
+                (SELECT school_id FROM school WHERE school.university=#{university} AND school.department=#{department}))
+    </insert>
+
+    <update id="update">
+        update user
+        set user_name = #{userForm.userName},
+            phone_number = #{userForm.phoneNumber},
+            user_id = #{userForm.userID},
+            user_password = #{userForm.password},
+            mileage = #{userForm.mileage}
+        where id = #{id};
+    </update>
+
+    <select id="findByLoginID" resultType="User">
+        select u.id, u.user_id, u.user_password, u.user_name, u.phone_number, u.mileage, s.university, s.department
+        from user u
+        inner join school s on u.school_id = s.school_id
+        where u.user_id=#{userID};
+    </select>
+
+    <select id="findById" resultType="User">
+        select * from user where id=#{id};
+    </select>
+
+    <update id="plusMileage">
+        update user
+        set mileage = mileage + #{mileage}
+        where id = #{id}
+    </update>
+
+</mapper>

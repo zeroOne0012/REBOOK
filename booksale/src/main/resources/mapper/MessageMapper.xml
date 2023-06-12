@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dbteam4.booksale.repository.MessageMapper">
+    <insert id="save" useGeneratedKeys="true" keyProperty="messageId">
+        insert into message (sender_id, receiver_id, send_time, message_content, user_fair)
+        VALUES (#{senderId}, #{receiverId}, #{sendTime}, #{messageContent}, #{userFair})
+    </insert>
+
+    <select id="findByTwoId" resultType="MessageDTO">
+        select * from message
+        where (sender_id = #{user1Id} and receiver_id= #{user2Id}) or (sender_id = #{user2Id} and receiver_id = #{user1Id});
+    </select>
+
+    <select id="findById" resultType="MessageDTO">
+        select * from message
+        where sender_id = #{userId} or receiver_id = #{userId}
+    </select>
+
+    <resultMap id="MessageAndUser" type="MessageUserDTO">
+        <id property="messageId" column="message_id"/>
+        <result property="sendTime" column="send_time"/>
+        <result property="messageContent" column="message_content"/>
+        <result property="userFair" column="user_fair"/>
+        <association property="senderUser" javaType="User">
+            <id property="id" column="u1_id" />
+            <result property="userName" column="u1_user_name"/>
+            <result property="phoneNumber" column="u1_phone_Number"/>
+            <result property="userID" column="u1_user_id"/>
+            <result property="mileage" column="u1_mileage"/>
+        </association>
+        <association property="receiverUser" javaType="User">
+            <id property="id" column="u2_id" />
+            <result property="userName" column="u2_user_name"/>
+            <result property="phoneNumber" column="u2_phone_Number"/>
+            <result property="userID" column="u2_user_id"/>
+            <result property="mileage" column="u2_mileage"/>
+        </association>
+    </resultMap>
+
+    <select id="findLastMessageList" resultMap="MessageAndUser">
+        select message_id, sender_id, receiver_id, send_time, user_fair, message_content
+        , u1.id as u1_id, u1.user_id as u1_user_id, u1.user_name as u1_user_name, u1.phone_number as u1_phone_number, u1.mileage as u1_mileage
+        , u2.id as u2_id, u2.user_id as u2_user_id, u2.user_name as u2_user_name, u2.phone_number as u2_phone_number, u2.mileage as u2_mileage
+        from message m
+                          join user u1 on m.sender_id = u1.id
+                          join user u2 on m.receiver_id= u2.id
+
+        where
+                message_id in (select max(message_id) as last_message from message group by user_fair)
+          and (sender_id = #{userId} or receiver_id = #{userId});
+    </select>
+
+</mapper>

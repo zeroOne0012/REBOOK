@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css" th:href="@{/css/style.css}">
+</head>
+<body>
+<a href="index_logined.html" th:href="@{/}"><h1 class = "title logo"><span>R</span><span>E</span><span>B</span><span>O</span><span>O</span><span>K</span></h1></a>
+
+<div class="mail_each-head">
+    <a href="chat.html" th:href="@{/chat}"><img class="backward-icon" src="../img/backward2.png" th:src="@{/img/backward2.png}"></a>
+    <div class="mail_each-memberID"><strong th:text="${otherUserName}">helloworld1234(채팅상대방 회원 ID)</strong></div>
+</div>
+
+<div class="mail_each-body">
+    <div id="chatMessages" class="chat-content">
+        <th:block th:each="message : ${messages}">
+            <div class = "chat-sent" th:if="${message.senderId} == ${session.loginUser.id}">
+                <span class = "time" th:text="${#temporals.format(message.sendTime, 'HH:mm')}">01:23</span>
+                <span class = "message"  th:text="${message.messageContent}">끝말잇기 하자</span>
+            </div>
+            <div class = "chat-received" th:unless="${message.receiverId} == ${otherUserId}">
+                <span class = "message" th:text="${message.messageContent}">름셈부르크</span>
+                <span class = "time" th:text="${#temporals.format(message.sendTime, 'HH:mm')}">01:25</span>
+            </div>
+        </th:block>
+    </div>
+
+    <input class = "input-message" id ="message-input">
+    <span class="custom-button" id="send-message-button" style="display: none">전송</span>
+</div>
+
+</body>
+
+<script th:inline="javascript">
+    const userId = [[${session.loginUser.id}]];
+    const otherUserId = [[${otherUserId}]];
+
+    let protocol = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
+    let socket = new WebSocket(protocol + window.location.host + "/chatting"+"?userId=" + userId + "&otherUserId=" +otherUserId);
+
+    let chatMessages = document.getElementById("chatMessages");
+    let input = document.getElementById("message-input");
+    let sendMessageButton = document.getElementById('send-message-button');
+
+    input.addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {  // Enter 키의 keyCode는 13입니다.
+            sendMessageButton.click();  // 버튼을 클릭합니다.
+        }
+    });
+
+    sendMessageButton.addEventListener('click', function() {
+        let message = document.getElementById('message-input').value;
+        if (message != "") {
+            socket.send(message);
+            addSentMessage(message, getCurrentTime())
+            input.value=""
+        }
+    });
+
+
+    socket.onopen = function(event) {
+        console.log("WebSocket 연결 성공");
+    };
+
+    socket.onmessage = function(event) {
+        let receivedMessage = event.data;
+        console.log("서버로부터 메시지 수신: " + receivedMessage);
+
+        addReceivedMessage(receivedMessage, getCurrentTime())
+    };
+
+    function addSentMessage(message, time) {
+        let messageElement = document.createElement("div");
+        messageElement.classList.add("chat-sent");
+        messageElement.innerHTML = `
+      <span class="time">${time}</span>
+      <span class="message">${message}</span>
+    `;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addReceivedMessage(message, time) {
+        let messageElement = document.createElement("div");
+        messageElement.classList.add("chat-received");
+        messageElement.innerHTML = `
+      <span class="message">${message}</span>
+      <span class="time">${time}</span>
+    `;
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // 현재 시간을 'HH:mm' 형식으로 반환하는 함수
+    function getCurrentTime() {
+        let now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let time = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0");
+        return time;
+    }
+</script>
+</html>

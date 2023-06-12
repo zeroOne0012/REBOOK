@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+            <link rel="stylesheet" href="../css/style.css">
+            </head>
+            <body>
+            <a href="index_logined.html" th:href="@{/}"><h1 class = "title logo"><span>R</span><span>E</span><span>B</span><span>O</span><span>O</span><span>K</span></h1></a>
+            <h1 class="sub-title">쪽지함</h1>
+
+            <div class="chatting-list read" th:each="message : ${lastMessageList}">
+                <div class="chatting-detail" th:with="otherUser = ${session.loginUser.id} == ${message.senderUser.id} ? ${message.receiverUser} : ${message.senderUser}">
+                    <div class="lastest-chatRecord" th:text="${#temporals.format(message.sendTime, 'yyyy-MM-dd HH:mm')}">03/05 14:02</div>
+                    <div class="chatting-memberID" th:text="${otherUser.userName}"><strong>helloworld1234</strong></div>
+                    <div class="state-read">&nbsp;</div>
+                    <a href="mail_each.html" th:href="@{/chat/each/{otherUser}(otherUser=${otherUser.id})}">
+                        <div class="lastest-chatting" th:text="${message.messageContent}">책 팔렸나요?</div>
+                    </a>
+                </div>
+            </div>
+
+<!--            <div class="chatting-list notread">-->
+<!--                <div class="chatting-detail">-->
+<!--                    <div class="lastest-chatRecord">03/03 16:42</div>-->
+<!--                    <div class="chatting-memberID"><strong>데베설좋아</strong></div>-->
+<!--                    <div class="state-unread">안 읽음</div>-->
+<!--                    <a href="mail_each.html" th:href="@{/chat/each/15}"><div class="lastest-chatting">사용감은요?</div></a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            -->
+<!--            <div class="chatting-list notread">-->
+<!--                <div class="chatting-detail">-->
+<!--                    <div class="lastest-chatRecord">02/28 21:32</div>-->
+<!--                    <div class="chatting-memberID"><strong>데베설싫어</strong></div>-->
+<!--                    <div class="state-read">읽음</div>-->
+<!--                    <a href="mail_each.html" th:href="@{/chat/each/15}"><div class="lastest-chatting">데.베.설</div></a>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!-- 회원 사이드바 -->
+<div th:if="${session.loginUser != null}"  th:insert="~{layout/fragment/login-sidebar :: login-sidebar}"></div>
+
+</body>
+</html>

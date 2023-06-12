@@ -1,0 +1,66 @@
+<!--<header class="container-fluid header" th:fragment="header">-->
+    <div class="additional-menu" role="group"><!--aria-label="Basic example"-->
+      <a href="login.html" th:href="@{/user/login}"><p class="btn">login</p></a>
+      <a href="register.html" th:href="@{/user/register}"><p class="btn">register</p></a>
+      <p class="btn">inquiry</p>
+    </div>
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col">
+        <a href="index.html" th:href="@{/}"><img src="/img/1.jpg" class="logo" alt="."></a>
+      </div>
+      <div class="col col-5">
+        <form class = "search-form">
+          
+          <select class="form-select search-select" aria-label="filter for searching">
+            <option selected>통합검색</option>
+            <option value="1">책 제목</option>
+            <option value="2">ISBN</option>
+            <option value="3">저자</option>
+          </select>
+          <input type="text" class="form-control search-input" placeholder="Search">
+          <input type="submit" class="btn search-button" value="Go!"></button>
+        </form>
+      </div>
+      <div class="col col-3">
+
+      </div>
+    </div>
+      <nav class="navbar navbar-expand-lg nav-mar">
+        <div class="container-fluid">
+          <!-- <a class="navbar" href="#">intro</a> -brand -->
+          <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button> -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            
+            <ul class="nav nav-pills nav-fill header-menu">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="index.html" th:href="@{/}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="books.html" th:href="@{/books}">Books</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="ranking.html" th:href="@{ranking}">Ranking</a>
+              </li>
+            </ul>
+            <!-- <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li> -->
+            <!-- <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button> 
+            </form>-->
+          </div>
+        </div> 
+      </nav>
+  </header>
+<!--소개, 회원랭킹, 중고책방, 문의, 로그인, 회원가입, 
+    <div class="container-xxl test test2">
+    <h1> Hi</h1></div>
+
+ <textarea></textarea>
+
+-->

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<main class="school-main">
+  <h1 class="school-text">대학교/학과 저장</h1>
+  <form class="row g-3 school-form" method="post" action="/department/save">
+    <div class="col-md-10 school-input">
+      <label for="university-input" class="form-label">대학교</label>
+      <input type="text" id="university-input" placeholder="대학교 이름" name="university">
+    </div>
+    <div class="col-md-10 department-input">
+      <label for="department-input" class="form-label">학과/학부</label>
+      <input type="text" id="department-input" placeholder="학과/학부 이름" name="department">
+    </div>
+    <input type="submit" value="submit">
+  </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- about membr -->
+    <div class = "account-logined">
+        <div class = "member-info" role="group">
+            <div class = "member-detail">
+                <div>전강욱 님</div>
+                <div>절대신</div>
+            </div>
+            <div class = "member-detail">
+                <span class = "col"><a href = "user/userInfo.html" th:href="@{/user/info}">회원정보</a></span>
+
+                <span class = "col"><a href="#" onclick="document.getElementById('logout').submit();">로그아웃</a></span>
+            </div>
+        </div>
+
+        <div class = "post-button">판매글 작성하기</div>
+
+        <div class = "chat">
+            <div class = "chat-button btn">
+                ▼ 대화내역
+            </div>
+            <div class = "chat-list invisible">
+
+
+
+                <div class = "chat-block">
+                    <div class = "chat-name btn">박병욱</div>
+                    <div class = "chat-detail invisible">
+                        <div class = "chat-sent">
+                            <span class = "time">01:23</span>
+                            <span class = "message">디자인 빨리 끝내</span>
+                        </div>
+                        <div class = "chat-sent">
+                            <span class = "time">01:23</span>
+                            <span class = "message">대답.</span>
+                        </div>
+
+                        <div class = "chat-received">
+                            <span class = "message">ㅇㅇ</span>
+                            <span class = "time">01:23</span>
+                        </div>
+                        <form>
+                            <input class = "input-message">
+                        </form>
+                    </div>
+
+                </div>
+
+
+
+                <div class = "chat-block">
+                    <div class = "chat-name btn">전강옥</div>
+                    <div class = "chat-detail invisible">
+                        <div class = "chat-sent">
+                            <span class = "time">01:23</span>
+                            <span class = "message">데베설 A+ 받는 방법? 줄 바 꿈 테 스 트</span>
+                        </div>
+
+                        <div class = "chat-received">
+                            <span class = "message">있겠냐?</span>
+                            <span class = "time">01:23</span>
+                        </div>
+                        <form>
+                            <input class = "input-message">
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <!-- logo + search-bar + recent -->
+    <h1 class = "title"><span>R</span><span>E</span><span>B</span><span>O</span><span>O</span><span>K</span></h1>
+    <form th:method="get" th:action="@{/search}">
+        <div class = "mt-5 mx-auto main-search-bar input-group mb-3">
+            <input type="hidden" name="condition" th:value="all">
+            <input class = "form-control rounded-pill" type="text" placeholder="검색어를 입력해주십시오." name="keyword">
+        </div>
+    </form>
+    <main class = "mx-auto">
+        <div class = "recent">recent</div>
+        <div class = "contents-container">
+
+          <div class = "content"> <!-- example-->
+            <img class = "book-icon" src = "../img/ex.png">
+            <div class = "content-info">
+              <div>알고리즘 및 실습</div>
+              <div>출판사, 지은이, 출판년도</div>
+              <div>가격</div>
+            </div>
+          </div>
+
+          <div class = "content"> <!-- example-->
+            <img class = "book-icon" src = "../img/ex.png">
+            <div class = "content-info">
+              <div>알고리즘 및 실습</div>
+              <div>출판사, 지은이, 출판년도</div>
+              <div>가격</div>
+            </div>
+          </div>
+
+          <div class = "content"> <!-- example-->
+            <img class = "book-icon" src = "../img/ex.png">
+            <div class = "content-info">
+              <div>알고리즘 및 실습</div>
+              <div>출판사, 지은이, 출판년도</div>
+              <div>가격</div>
+            </div>
+          </div>
+
+
+        </div>
+        <form id="logout" th:action="@{/user/logout}" method="POST">
+            <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+        </form>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src = "../js/chat.js"></script>
+</body>
+</html>

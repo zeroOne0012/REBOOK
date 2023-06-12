@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dbteam4.booksale.repository.BookMapper">
+
+    <insert id="save">
+        insert into book(ISBN, title, author, publisher, pub_date, image, discount, description)
+        values(#{ISBN}, #{title}, #{author}, #{publisher}, #{pubdate}, #{image}, #{discount}, #{description});
+    </insert>
+
+    <select id="findByISBN" resultType="Book">
+        select * from book
+        where ISBN =#{ISBN};
+    </select>
+
+    <select id="findBookWithPostsByISBN" resultMap="bookResultMap">
+        select b.ISBN, b.title, b.author, b.publisher, b.pub_date, b.image, b.discount, b.description,
+               p.post_id, p.seller_id, p.post_time, p.post_content, p.sales_method, p.post_price, p.shipping_method, p.book_quality, p.post_title, p.post_status
+        from
+            book b inner join post p on b.ISBN = p.book_ISBN
+        <where>
+            b.ISBN = #{ISBN}
+            <if test="cond.underPrice != null">
+                and p.post_price &lt;= #{cond.underPrice}
+            </if>
+            <if test="cond.discountRate !=null">
+                and ((b.discount - p.post_price) / b.discount * 100) &gt;= #{cond.discountRate}
+            </if>
+            <if test="cond.onSale != null or cond.reserved != null or cond.sold != null">
+                and (
+                <choose>
+                    <when test="cond.reserved != null">
+                        <if test="cond.onSale != null or cond.sold != null">
+                            (p.post_status ='예약중' or
+                        </if>
+                        <if test="cond.onSale != null">
+                            (p.post_status ='예약중')
+                        </if>
+                        <if test="cond.sold != null">
+                            (p.post_status ='예약중')
+                        </if>
+                    </when>
+                    <when test="cond.onSale != null">
+                        <if test="cond.sold != null">
+                            (p.post_status = '판매중' or
+                        </if>
+                        <if test="cond.sold == null">
+                            (p.post_status = '판매중')
+                        </if>
+                    </when>
+                    <when test="cond.sold != null">
+                        (p.post_status ='판매완료')
+                    </when>
+                </choose>
+                )
+            </if>
+            <if test="cond.shippingMethod != null and cond.shippingMethod !='' and cond.shippingMethod != '전체'">
+                and p.shipping_method = #{cond.shippingMethod}
+            </if>
+        </where>
+    </select>
+
+    <resultMap id="bookResultMap" type="BookPostsDTO">
+        <id property="ISBN" column="ISBN" />
+        <result property="title" column="title" />
+        <result property="author" column="author" />
+        <result property="image" column="image" />
+        <result property="discount" column="discount" />
+        <result property="publisher" column="publisher" />
+        <result property="pubDate" column="pub_date" />
+        <result property="description" column="description" />
+        <collection property="postList" ofType="Post">
+            <id property="postId" column="post_id" />
+            <result property="sellerId" column="seller_id" />
+            <result property="postTitle" column="post_title" />
+            <result property="postContent" column="post_content" />
+            <result property="salesMethod" column="sales_method" />
+            <result property="postPrice" column="post_price" />
+            <result property="shippingMethod" column="shipping_method" />
+            <result property="postStatus" column="post_status"/>
+            <result property="bookQuality" column="book_quality" />
+            <result property="postTime" column="post_time" />
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="bookResultMap">
+        select b.ISBN, b.title, b.author, b.publisher, b.pub_date, b.image, b.discount, b.description,
+        p.post_id, p.seller_id, p.post_time, p.post_content, p.sales_method, p.post_price, p.shipping_method, p.book_quality, p.post_title
+        from book b inner join post p on b.ISBN = p.book_ISBN
+        <where>
+
+            <if test="bookSearchType.name() == 'all'">
+                replace(b.title, ' ', '') like concat('%', #{keyword}, '%') or b.author like concat('%', #{keyword}, '%') or  b.isbn = #{keyword};
+            </if>
+            <if test="bookSearchType.name() == 'bookTitle'">
+                b.title like concat('%', #{keyword}, '%');
+            </if>
+            <if test="bookSearchType.name() == 'ISBN'">
+                b.isbn = #{keyword};
+            </if>
+            <if test="bookSearchType.name() == 'author'">
+                b.author like concat('%', #{keyword}, '%');
+            </if>
+        </where>
+    </select>
+</mapper>

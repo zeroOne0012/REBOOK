@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<a href="index.html" th:href="@{/}"><h1 class = "title logo"><span>R</span><span>E</span><span>B</span><span>O</span><span>O</span><span>K</span></h1></a>
+<h1 class="sub-title">알림함</h1>
+
+<div class="alarm-list read">
+    <div class="alarm-detail">
+        <div class="lastest-alarmRecord">03/10 13:00</div>
+        <div class="alarm-title"><strong>알림이 도착했습니다.</strong></div>
+        <div class="alarm-unchecked">미확인</div>
+        <div class="alarm-message">게시글을 게시한지 14일이 넘었습니다..</div>
+    </div>
+</div>
+
+<div class="alarm-list notread">
+    <div class="alarm-detail">
+        <div class="lastest-alarmRecord">03/03 13:00</div>
+        <div class="alarm-title"><strong>알림이 도착했습니다.</strong></div>
+        <div class="alarm-checked">확인</div>
+        <div class="alarm-message">게시글을 게시한지 7일이 넘었습니다..</div>
+    </div>
+</div>
+
+<!-- 회원 사이드바 -->
+<div th:if="${session.loginUser != null}"  th:insert="~{layout/fragment/login-sidebar :: login-sidebar}"></div>
+
+</div>
+</body>
+</html>

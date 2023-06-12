@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div th:if="${session.loginUser == null}" th:insert="~{/layout/fragment/header :: header}"></div>
+
+    <br>
+
+    <h1 class = "title"><span>R</span><span>E</span><span>B</span><span>O</span><span>O</span><span>K</span></h1>
+    <form th:method="get" th:action="@{/search}">
+        <div class = "mt-5 mx-auto main-search-bar input-group mb-3">
+            <input type="hidden" name="condition" th:value="all">
+            <input class = "form-control rounded-pill" type="text" placeholder="검색어를 입력해주십시오." name="keyword">
+        </div>
+    </form>
+
+    <div th:if="${session.loginUser != null}"  th:insert="~{layout/fragment/login-sidebar :: login-sidebar}"></div>
+
+
+    <main class = "mx-auto">
+        <div class = "recent">recent</div>
+        <div class = "contents-container">
+
+        <a th:each="post : ${recentPosts}" th:href="@{/post/view/{postId}(postId=${post.postId}) }">
+          <div class = "content"> <!-- example-->
+            <img class = "book-icon" src = "../img/ex.png" th:src="${post.book.image}">
+            <div class = "content-info">
+              <div th:text="${post.postTitle}">알고리즘 및 실습</div>
+              <div th:text="|${post.book.publisher} / ${post.book.author} |">출판사, 지은이, 출판년도</div>
+              <div th:text="|가격 : ${post.postPrice}|">가격</div>
+            </div>
+          </div>
+        </a>
+        </div>
+    </main>
+    <script src = "../js/chat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>

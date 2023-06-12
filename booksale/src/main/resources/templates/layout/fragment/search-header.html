@@ -1,0 +1,25 @@
+<header class="container-fluid header" th:fragment="search-header">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+            <a href="index.html" th:href="@{/}"><h1 class = "title logo"><span>R</span><span>E</span><span>B</span><span>O</span><span>O</span><span>K</span></h1></a>
+        </div>
+        <div class="col col-5">
+            <form class = "search-form mt-3" th:method="get" th:action="@{/search}">
+
+                <select class="form-select search-select" aria-label="filter for searching" name="condition">
+                    <option value="all" selected>통합검색</option>
+                    <option value="bookTitle">책 제목</option>
+                    <option value="ISBN">ISBN</option>
+                    <option value="author">저자</option>
+                </select>
+                <input type="text" class="form-control search-input" placeholder="Search" th:value="${param.keyword}" name="keyword">
+                <input type="submit" class="btn search-button" value="Go!"></button>
+            </form>
+        </div>
+        <div class="col col-3">
+
+        </div>
+    </div>
+</header>

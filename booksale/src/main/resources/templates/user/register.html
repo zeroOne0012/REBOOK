@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <a href="../index.html" th:href="@{/}"><h1 class = "title logo"><span>R</span><span>E</span><span>B</span><span>O</span><span>O</span><span>K</span></h1></a>
+    <div class = "row">
+    <main class="register-main mx-auto">
+        <h1 class="register-text">회원가입</h1>
+        <div class="row">
+
+            <form class="row g-3 register-form" th:method="post" th:action="@{/user/save}">
+                <div class="col-md-10 register-input">
+                    <label for="validationServer01" class="form-label">이름</label>
+                    <input type="text" class="form-control rName" id="validationServer01" placeholder="Name" name="userName" required>
+                </div>
+    
+                <div class="col-md-10 register-input">
+                    <label for="validationServer02" class="form-label">전화번호</label>
+                    <input type="text" class="form-control rPhone" id="validationServer02" placeholder="숫자만 입력" name ="phoneNumber" required>
+                </div>
+
+                <div class="col-md-10 register-input">
+                    <label for="validationServerUsername" class="form-label">아이디</label>
+                    <input type="text" class="form-control rId" id="validationServerUsername" placeholder="ID" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" name="userID" required>
+                </div>
+
+                <div class="col-md-10 register-input">
+                    <label for="validationServer03" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control rPw" id="validationServer03" placeholder="password" aria-describedby="validationServer03Feedback" name="password" required>
+                </div>
+
+                <div class="col-md-3 register-input">
+                    <label for="validationServer04" class="form-label">학교</label>
+                    <select class="form-select"  id="validationServer04" aria-describedby="validationServer04Feedback" name="university" onchange="changeDepartment()"required>
+                        <option selected disabled value="">Choose...</option>
+                        <option th:each="schoolname : ${schoolMajorMap.keySet()}" th:text="${schoolname}" >한국기술교육대학교</option>
+                    </select>
+                </div>
+                <div class="col-md-3 register-input" style="margin-left:4rem;">
+                    <label for="validationServer04" class="form-label">학과</label>
+                    <select class="form-select" id="validationServer05" aria-describedby="validationServer04Feedback" name="department" required>
+                        <option selected disabled value="">Choose...</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-3">
+                <button class="btn btn-primary register-button" type="submit">회원가입</button>
+                </div>
+            </form>
+
+        
+        <!-- <form class="register-form"></form>
+        <span class="register-input">
+        <input type="text" class="form-control" placeholder="ID" aria-label="Username" aria-describedby="addon-wrapping">
+        <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="addon-wrapping">
+        </span>
+        <input class="btn btn-dark" type="submit" value="Register!">
+        </form> -->
+        </div>
+      
+    </main>
+    <!-- <img src="/img/bigBook.jpg" class="" alt="." style="height:27rem"> -->
+    </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const schoolMajorMap = /*[[${schoolMajorMap}]]*/;
+
+        function changeDepartment() {
+
+            const university_option = document.getElementById("validationServer04");
+
+            let selectedUniversity = university_option.options[university_option.selectedIndex].text
+
+            let departmentList = schoolMajorMap[selectedUniversity]
+            let option="<option selected disabled value=\"\">Choose...</option>";
+            for (let i = 0; i < departmentList.length; i++) {
+                option += "<option value="+departmentList[i]+">"+departmentList[i]+"</option>";
+            }
+
+            document.getElementById("validationServer05").innerHTML = option;
+        }
+        /*]]>*/
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+    <!--JQUERY-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
